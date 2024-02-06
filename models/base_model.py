@@ -12,9 +12,8 @@ class BaseModel:
         self.updated_at = datetime.now()
     
     def __str__(self):
-        """ print: [<class name>] (<self.id>) <self.__dict__>"""
-        return f"{[self.__class__.__name__]} {(self.id)} {self.__dict__}"
-
+        """ print class name id and dic"""
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
     def save(self):
         """ updates the public instance attribute updated_at with the current datetime"""
         self.updated_at = datetime.now()
