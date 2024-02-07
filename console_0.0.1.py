@@ -1,3 +1,11 @@
+#!/usr/bin/python3
+
+"""
+Module console
+
+Contain class Console
+"""
+
 import cmd
 
 class HBNBCommand(cmd.Cmd):
