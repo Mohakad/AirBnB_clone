@@ -5,11 +5,18 @@ from datetime import datetime
 
 class BaseModel:
     """BaseModel that defines all common attributes/methods for other classes"""
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """initialization"""
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if len(kwargs) == 0:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+        else:
+            for key, data in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    self.__dict__[key] = datetime.strptime(data, "%Y-%m-%dT%H:%M:%S.%f")
+                else:
+                    self.__dict__[key] = data 
     
     def __str__(self):
         """ print class name id and dic"""
