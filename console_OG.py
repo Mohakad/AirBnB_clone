@@ -95,37 +95,30 @@ class HBNBCommand(cmd.Cmd):
         else:
             print([str(obj) for key, obj in all_instances.items() if args_list[0] in key])
 
-    def do_update(self, line):
+    def do_update(self, args):
         """Update an instance based on the class name and id"""
-        args = parse(line)
-        if len(args) >= 4:
-            key = "{}.{}".format(args[0], args[1])
-            cast = type(eval(args[-1]))
-            attr_update = args[-1]
-            attr_update = attr_update.strip("'")
-            attr_update = attr_update.strip('"')
-            new_str = args[2:-1]
-            attr_name = ""
-            for i in range(len(new_str)):
-                if i != len(new_str) - 1:
-                    attr_name += new_str[i] + " "
-                else:
-                    attr_name += new_str[i]
-                attr_name = attr_name.replace('"', "")
-            setattr(storage.all()[key], attr_name, cast(attr_update))
-            storage.all()[key].save()
-        elif len(line) == 0:
+        args_list = args.split()
+        if not args_list:
             print("** class name missing **")
-        elif args[0] not in storage.class_dict:
+        elif args_list[0] not in self.all_classes:
             print("** class doesn't exist **")
-        elif len(args) == 1:
+        elif len(args_list) < 2:
             print("** instance id missing **")
-        elif ("{}.{}".format(args[0], args[1])) not in storage.all().keys():
-            print("** no instance found **")
-        elif len(args) == 2:
+        elif len(args_list) < 3:
             print("** attribute name missing **")
-        else:
+        elif len(args_list) < 4:
             print("** value missing **")
+        else:
+            key = args_list[0] + "." + args_list[1]
+            all_instances = self.load_instances()
+            if key in all_instances:
+                obj = all_instances[key]
+                attribute_name = args_list[2]
+                attribute_value = args_list[3]
+                setattr(obj, attribute_name, attribute_value)
+                obj.save()
+            else:
+                print("** no instance found **")
 
     def load_instances(self):
         """Load instances from the JSON file"""
