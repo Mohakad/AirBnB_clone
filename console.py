@@ -9,6 +9,7 @@ Contain class Console
 import cmd
 import json
 from models.base_model import BaseModel
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
@@ -97,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """Updates an instance based on the class name and id"""
-        args = parse(line)
+        args = line.split()
         if len(args) >= 4:
             key = "{}.{}".format(args[0], args[1])
             cast = type(eval(args[-1]))
