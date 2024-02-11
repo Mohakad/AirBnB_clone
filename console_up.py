@@ -96,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
             print([str(obj) for key, obj in all_instances.items() if args_list[0] in key])
 
     def do_update(self, line):
-        """Updates an instance based on the class name and id"""
+        """Update an instance based on the class name and id"""
         args = parse(line)
         if len(args) >= 4:
             key = "{}.{}".format(args[0], args[1])
