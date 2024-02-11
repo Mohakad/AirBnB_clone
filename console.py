@@ -9,6 +9,7 @@ Contain class Console
 import cmd
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
@@ -180,9 +181,11 @@ class HBNBCommand(cmd.Cmd):
                      if key.startswith(args[0] + ".")]
             print(len(count))
 
+
 def parse(line):
     """Helper method to parse user typed input"""
     return tuple(line.split())
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
