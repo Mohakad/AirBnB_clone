@@ -48,5 +48,5 @@ class BaseModel:
 
     def __str__(self):
         """dict"""
-        nm = "self.__class__.__name__"
+        nm = self.__class__.__name__
         return "[{}] ({}) {}".format(nm, self.id, self.__dict__)
