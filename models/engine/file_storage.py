@@ -28,12 +28,24 @@ class FileStorage:
 
     def reload(self):
         """deserializes the JSON file to __objects (only if the JSON file (__file_path) exists"""
-        try:
-            with open(FileStorage.__file_path) as jfl:
+        with open(FileStorage.__file_path) as jfl:
                 jdict = json.load(jfl)
                 for data in jdict.values():
                     cname = data["__class__"]
                     del data["__class__"]
                     self.new(eval(cname)(**data))
+<<<<<<< HEAD
+=======
         except:
             return
+
+    __classes = {
+        'BaseModel': BaseModel,
+        'Place': Place,
+        'State': State,
+        'City': City,
+        'Amenity': Amenity,
+        'Review': Review
+        # Add other classes as needed
+    }
+>>>>>>> 84b7c26d85a8c8dc27606d10cf1906f84fe33182

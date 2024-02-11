@@ -9,11 +9,22 @@ Contain class Console
 import cmd
 import json
 from models.base_model import BaseModel
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     file_path = "file.json"
     all_classes = {"BaseModel": BaseModel}
+
+    all_classes = {
+        "BaseModel": BaseModel,
+        "Place": Place,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Review": Review
+        # Add other classes as needed
+    }
 
     def do_EOF(self, args):
         """EXIT command to exit the program"""
@@ -97,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """Updates an instance based on the class name and id"""
-        args = parse(line)
+        args = line.split()
         if len(args) >= 4:
             key = "{}.{}".format(args[0], args[1])
             cast = type(eval(args[-1]))
@@ -126,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         else:
             print("** value missing **")
-
+        
     def load_instances(self):
         """Load instances from the JSON file"""
         try:
