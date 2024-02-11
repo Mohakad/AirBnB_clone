@@ -16,6 +16,16 @@ class HBNBCommand(cmd.Cmd):
     file_path = "file.json"
     all_classes = {"BaseModel": BaseModel}
 
+    all_classes = {
+        "BaseModel": BaseModel,
+        "Place": Place,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Review": Review
+        # Add other classes as needed
+    }
+
     def do_EOF(self, args):
         """EXIT command to exit the program"""
         return True
@@ -127,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         else:
             print("** value missing **")
-
+        
     def load_instances(self):
         """Load instances from the JSON file"""
         try:

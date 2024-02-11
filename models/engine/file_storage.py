@@ -37,3 +37,13 @@ class FileStorage:
                     self.new(eval(cname)(**data))
         except:
             return
+
+    __classes = {
+        'BaseModel': BaseModel,
+        'Place': Place,
+        'State': State,
+        'City': City,
+        'Amenity': Amenity,
+        'Review': Review
+        # Add other classes as needed
+    }
